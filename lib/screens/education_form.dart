@@ -167,13 +167,11 @@ class _EducationFormPageState extends State<EducationFormPage> {
                     if (value == null || value.trim().isEmpty) {
                       return "URL foto tidak boleh kosong!";
                     }
-                    validator: (String? value) {
                     final uri = Uri.tryParse(value);
                     if (uri == null || !uri.isAbsolute) {
                         return "Masukkan URL yang valid!";
                     }
                     return null;
-                    },
                   },
                 ),
               ),
