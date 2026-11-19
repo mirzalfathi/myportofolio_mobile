@@ -81,7 +81,7 @@ class _EducationFormPageState extends State<EducationFormPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  value: _level,
+                  initialValue: _level,
                   items: _levels
                       .map((level) => DropdownMenuItem(
                             value: level,
