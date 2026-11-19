@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
-// TODO: Impor halaman ProjectFormPage jika sudah dibuat
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -52,7 +51,7 @@ class LeftDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
-            title: const Text('Add Projects'),
+            title: const Text('Add Project'),
             // Navigasi ke halaman tambah proyek
             onTap: () {
               Navigator.pushReplacement(
