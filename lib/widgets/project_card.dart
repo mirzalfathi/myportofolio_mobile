@@ -32,7 +32,7 @@ class ItemCard extends StatelessWidget {
             );
 
           // Navigasi ke halaman form
-          if (item.name == "Add Project") {
+          if (item.name == "Add Experience") {
             Navigator.push(
               context,
               MaterialPageRoute(

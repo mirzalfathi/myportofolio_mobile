@@ -11,44 +11,29 @@ class ProjectFormPage extends StatefulWidget {
 class _ProjectFormPageState extends State<ProjectFormPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String _projectName = "";
+  String _experienceName = "";
   String _description = "";
-  String _category = "Web Development"; // default
-  String _technologies = "";
-  String _projectLink = "";
+  String _category = "Full-Time";
+  String _thumbnailUrl = "";
+  String _startYear = "";
+  String _endYear = "";
 
   final List<String> _categories = [
-    'Web Development',
-    'Mobile Development',
-    'Machine Learning',
-    'Data Science',
+    'Internship',
+    'Research',
+    'Volunteer',
+    'Part-Time',
+    'Full-Time',
+    'Freelance',
     'Other',
   ];
-
-  // Dekorasi input yang dipakai berulang agar kode lebih ringkas.
-  InputDecoration _inputDecoration(String label) {
-    return InputDecoration(
-      hintText: label,
-      labelText: label,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-    );
-  }
-
-  String? _requiredValidator(String? value, String message) {
-    if (value == null || value.trim().isEmpty) {
-      return message;
-    }
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('Add Project Form'),
+          child: Text('Tambah Pengalaman Baru'),
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
@@ -60,39 +45,39 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // === Project Name ===
+              // === Nama Experience ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Nama Proyek",
-                    labelText: "Nama Proyek",
+                    hintText: "misal: OSIS",
+                    labelText: "Nama Pengalaman",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _projectName = value!;
+                      _experienceName = value!;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Nama proyek tidak boleh kosong!";
+                      return "Nama pengalaman tidak boleh kosong!";
                     }
                     return null;
                   },
                 ),
               ),
 
-              // === Description ===
+              // === Deskripsi ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   maxLines: 5,
                   decoration: InputDecoration(
-                    hintText: "Deskripsi Proyek",
-                    labelText: "Deskripsi Proyek",
+                    hintText: "Deskripsi pengalaman",
+                    labelText: "Deskripsi",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -104,19 +89,19 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Deskripsi proyek tidak boleh kosong!";
+                      return "Deskripsi tidak boleh kosong!";
                     }
                     return null;
                   },
                 ),
               ),
 
-              // === Category ===
+              // === Kategori ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    labelText: "Kategori Proyek",
+                    labelText: "Kategori",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -124,9 +109,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   value: _category,
                   items: _categories
                       .map((category) => DropdownMenuItem(
-                    value: category,
-                    child: Text(category),
-                  ))
+                            value: category,
+                            child: Text(category),
+                          ))
                       .toList(),
                   onChanged: (String? newValue) {
                     setState(() {
@@ -136,40 +121,94 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 ),
               ),
 
-              // === Technologies ===
+              // === Upload Thumbnail ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Contoh: Flutter, Django, Figma",
-                    labelText: "Teknologi yang Digunakan",
+                    hintText: "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                    labelText: "Upload Thumbnail",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _technologies = value!;
+                      _thumbnailUrl = value!;
                     });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Thumbnail URL tidak boleh kosong!";
+                    }
+                    final uri = Uri.tryParse(value);
+                    if (uri == null || !uri.isAbsolute) {
+                      return "Masukkan URL yang valid!";
+                    }
+                    return null;
                   },
                 ),
               ),
 
-              // === Project Link ===
+              // === Tahun Dimulai ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: "URL Proyek (opsional)",
-                    labelText: "Tautan Proyek",
+                    hintText: "misal: 2022",
+                    labelText: "Tahun Dimulai",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _projectLink = value!;
+                      _startYear = value!;
                     });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Tahun dimulai tidak boleh kosong!";
+                    }
+                    if (int.tryParse(value) == null) {
+                      return "Tahun dimulai harus berupa angka!";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+
+              // === Tahun Berakhir ===
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: "misal: 2026",
+                    labelText: "Tahun Berakhir",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _endYear = value!;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Tahun berakhir tidak boleh kosong!";
+                    }
+                    if (int.tryParse(value) == null) {
+                      return "Tahun berakhir harus berupa angka!";
+                    }
+                    final start = int.tryParse(_startYear);
+                    final end = int.tryParse(value);
+                    if (start != null && end != null && end < start) {
+                      return "Tahun berakhir tidak boleh sebelum tahun dimulai!";
+                    }
+                    return null;
                   },
                 ),
               ),
@@ -189,16 +228,17 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Proyek berhasil ditambahkan!'),
+                              title: const Text('Pengalaman berhasil ditambahkan!'),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Nama Proyek: $_projectName'),
+                                    Text('Nama Pengalaman: $_experienceName'),
                                     Text('Deskripsi: $_description'),
                                     Text('Kategori: $_category'),
-                                    Text('Teknologi: $_technologies'),
-                                    Text('Tautan: $_projectLink'),
+                                    Text('Thumbnail: $_thumbnailUrl'),
+                                    Text('Tahun Dimulai: $_startYear'),
+                                    Text('Tahun Berakhir: $_endYear'),
                                   ],
                                 ),
                               ),
@@ -208,6 +248,14 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                     _formKey.currentState!.reset();
+                                    setState(() {
+                                      _experienceName = "";
+                                      _description = "";
+                                      _category = "Full-Time";
+                                      _thumbnailUrl = "";
+                                      _startYear = "";
+                                      _endYear = "";
+                                    });
                                   },
                                 ),
                               ],
@@ -217,7 +265,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       }
                     },
                     child: const Text(
-                      "Save",
+                      "Tambah Pengalaman",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

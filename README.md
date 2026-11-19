@@ -30,6 +30,10 @@ Website portofolio mobile pribadi Mirza Al Fathi, dibuat untuk menampilkan profi
 4. StatelessWidget adalah widget yang tampilannya tidak berubah setelah dibuat karena hanya bergantung pada data yang diterimanya dari luar, sedangkan StatefulWidget memiliki state internal sehingga tampilannya dapat berubah selama aplikasi berjalan melalui pemanggilan setState(). StatelessWidget sebaiknya dipilih untuk tampilan yang bersifat tetap, seperti judul, ikon, atau kartu informasi. StatefulWidget digunakan ketika tampilan perlu berubah akibat interaksi pengguna atau perubahan data, misalnya input form, atau tombol on/off.
 5. BuildContext adalah referensi lokasi sebuah widget di dalam widget tree. Lewat context, widget bisa mengambil informasi dari widget di atasnya, seperti Theme.of(context) untuk warna di AppBar dan MediaQuery.of(context) untuk lebar InfoCard. Di method build(BuildContext context), context tersedia sebagai parameter dan dipakai untuk mengakses informasi tersebut saat menyusun tampilan.
 6. Hot reload menerapkan perubahan kode ke aplikasi yang sedang berjalan tanpa menghilangkan data atau halaman yang sedang dibuka. Hot restart menjalankan ulang aplikasi dari awal sehingga semuanya kembali ke kondisi awal. Hot reload tidak cukup kalau yang diubah adalah nilai awal variabel (misalnya nama di MyHomePage), jadi perlu hot restart. Kalau menambah package, asset, atau mengubah pengaturan Android/iOS, aplikasi harus dihentikan lalu dijalankan ulang (full restart).
+
+### Tugas 8
+
 ---
 ## AI Disclosure
 1. Tugas 7 - Menggunakan Claude untuk membantu menjawab pertanyaan reflektif (https://claude.ai/share/7802b538-9a6b-4975-8f81-01c4517f39cc)
+2. Tugas 8 - Menggunakan Claude untuk membantu memperbaiki error navigasi, menyusun struktur form baru (education_form.dart), serta pengecekan checklist tugas. (https://claude.ai/share/4fac8ac4-f869-4e7b-aeac-4523daba66dd)

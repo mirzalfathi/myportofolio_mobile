@@ -52,7 +52,7 @@ class LeftDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
-            title: const Text('Add Project'),
+            title: const Text('Add Experience'),
             // Navigasi ke halaman tambah proyek
             onTap: () {
               Navigator.pushReplacement(
